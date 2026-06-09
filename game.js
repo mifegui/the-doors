@@ -148,7 +148,7 @@ addEventListener("keydown", e => {
   if (MOVE_KEYS.includes(k)) e.preventDefault();
 });
 addEventListener("keyup", e => { keys[e.key.toLowerCase()] = false; });
-document.getElementById("reset").addEventListener("click", reset);
+document.getElementById("reset").addEventListener("click", () => reset());
 
 function vel() {
   let vx = 0, vy = 0;
