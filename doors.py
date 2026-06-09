@@ -83,18 +83,20 @@ class Game:
         self.loc = ["path", 0]          # ["path", depth] or ["wrong", origin, taken]
         self.at = "B"                   # door the player currently stands at
         self.won = False
+        self.moves = 0                  # total moves taken (confirms a move registered)
         self.note = ""
 
     # --- persistence ---
     def to_dict(self):
         return {"seed": self.seed, "path": self.path, "loc": self.loc,
-                "at": self.at, "won": self.won}
+                "at": self.at, "won": self.won, "moves": self.moves}
 
     @classmethod
     def from_dict(cls, d):
         g = cls.__new__(cls)
         g.seed, g.path, g.loc = d["seed"], d["path"], d["loc"]
-        g.at, g.won, g.note = d["at"], d["won"], ""
+        g.at, g.won = d["at"], d["won"]
+        g.moves, g.note = d.get("moves", 0), ""
         return g
 
     # --- mechanics ---
@@ -104,6 +106,7 @@ class Game:
 
     def forward(self, door):
         self.note = ""
+        self.moves += 1
         if self.loc[0] == "path":
             d = self.loc[1]
             if door == self.path[d]:
@@ -127,9 +130,11 @@ class Game:
             if d == 0:
                 self.note = "The door behind you is locked."
                 return
+            self.moves += 1
             self.loc = ["path", d - 1]
             self.at = self.path[d - 1]   # emerge from the door you entered
         else:
+            self.moves += 1
             _, origin, taken = self.loc
             self.loc = ["path", origin]
             self.at = self.other_wrong(origin, taken)   # emerge from the OTHER wrong door
@@ -141,6 +146,7 @@ def render(g):
     back = "*B*" if g.at == "B" else " B "
     lines = [
         "",
+        f"    -- move {g.moves} --",
         f"       {lbl('L')}         {lbl('C')}         {lbl('R')}",
         "    +====+=========+=========+====+",
         "    |                              |",
