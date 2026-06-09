@@ -48,9 +48,9 @@ AGENT PROTOCOL (one command per move, state persists on disk):
 After each move the room is printed and the program exits. Read the room,
 decide, run the next command.
 
-THE ONLY HINT: the rooms are identical, so you cannot see your progress. But
-watch which door you EMERGE FROM when you step BACK. That is the one signal
-the maze cannot hide. Deduce the 4-door sequence from it.
+The rooms are identical and the program never tells you whether a door was
+right or wrong, or how far you've come. Figuring out the way through is the
+entire puzzle. Good luck.
 """
 
 
