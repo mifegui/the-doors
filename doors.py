@@ -55,6 +55,10 @@ Play ONLY through the printed room. Do NOT open, read, or decode the save file
 The rooms are identical and the program never tells you whether a door was
 right or wrong, or how far you've come. Figuring out the way through is the
 entire puzzle. Good luck.
+
+Do NOT brute-force the sequence by trying every combination. There is a
+logic to how the rooms connect — observe what happens as you move and
+deduce it. Solving by reasoning is the point; blind guessing is not.
 """
 
 
